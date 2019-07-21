@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { Passenger } from '../../containers/passenger-dashboard/models/passenger.interface'
 
 @Component({
@@ -28,13 +28,13 @@ import { Passenger } from '../../containers/passenger-dashboard/models/passenger
     </ul>
     `
 })
-export class PassengerDetailsComponent{
+export class PassengerDetailsComponent implements OnChanges{
     @Input()
     detail: Passenger;
 
     @Output()
     remove: EventEmitter <any> = new EventEmitter();
-    
+
     @Output()
     edit: EventEmitter <any> = new EventEmitter();
 
@@ -42,6 +42,12 @@ export class PassengerDetailsComponent{
     editing: boolean = false;
 
     constructor(){}
+
+    ngOnChanges(changes){
+        if(changes.detail){
+            this.detail = Object.assign({}, changes.detail.currentValue);
+        }
+    }
 
     onNameChange(value){
         this.detail.fullname = value;
