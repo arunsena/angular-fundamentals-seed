@@ -1,0 +1,61 @@
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Passenger } from '../../containers/passenger-dashboard/models/passenger.interface'
+
+@Component({
+    selector: 'passenger-details',
+    styleUrls: ['passenger-details.scss'],
+    template:`
+    <ul>
+        <li> 
+            <span class="status" [class.checked-in]="detail.checkedIn"></span>
+            <div *ngIf="editing">
+                <input type="text" 
+                [value]="detail.fullname" 
+                (input)="onNameChange(name.value)"
+                #name/>
+            </div>
+            <div *ngIf="!editing">{{detail.fullname}}</div>
+            <div class="sub-text"> 
+                Check in date: {{detail.checkInDate ? (detail.checkInDate| date: 'yMMMd') : ''}}
+            </div>
+            <button class="btn" (click)="toggleEdit()">
+                {{editing? 'Done': 'Edit'}} <span class="badge badge-primary"></span>
+            </button>
+            <button class="btn" (click)="onRemove()">
+                Remove <span class="badge badge-danger"></span>
+        </button>
+        </li>
+    </ul>
+    `
+})
+export class PassengerDetailsComponent{
+    @Input()
+    detail: Passenger;
+
+    @Output()
+    remove: EventEmitter <any> = new EventEmitter();
+    
+    @Output()
+    edit: EventEmitter <any> = new EventEmitter();
+
+
+    editing: boolean = false;
+
+    constructor(){}
+
+    onNameChange(value){
+        this.detail.fullname = value;
+    }
+    toggleEdit(){
+        if(this.editing) this.onEdit();
+        this.editing = !this.editing;
+    }
+
+    @Output()
+    onRemove(){
+        this.remove.emit(this.detail);
+    }
+    onEdit(){
+        this.edit.emit(this.detail);
+    }
+}
