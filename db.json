@@ -1,1 +1,39 @@
-{}
+{
+  "passengers": [
+    {
+      "fullname": "John Doe updated",
+      "id": 0,
+      "checkedIn": true,
+      "baggage": "hand-hold",
+      "checkInDate": "Jul 20, 2019"
+    },
+    {
+      "id": 1,
+      "fullname": "Mary Fisher",
+      "checkedIn": false,
+      "checkInDate": 1562208159257,
+      "baggage": ""
+    },
+    {
+      "id": 2,
+      "fullname": "Jim Kirk",
+      "checkedIn": true,
+      "checkInDate": 1563676902303,
+      "baggage": ""
+    },
+    {
+      "id": 3,
+      "fullname": "James Douglas",
+      "checkedIn": false,
+      "checkInDate": 1562208159257,
+      "baggage": ""
+    },
+    {
+      "id": 4,
+      "fullname": "Sam Adams",
+      "checkedIn": true,
+      "checkInDate": 1563676902303,
+      "baggage": ""
+    }
+  ]
+}

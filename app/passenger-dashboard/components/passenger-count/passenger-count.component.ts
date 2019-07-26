@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Passenger } from '../../containers/passenger-dashboard/models/passenger.interface'
+import { Passenger } from '../../models/passenger.interface'
 
 @Component({
     selector: 'passenger-count',
@@ -7,10 +7,10 @@ import { Passenger } from '../../containers/passenger-dashboard/models/passenger
         <h3>Airline Passengers</h3>
         <hr />
         <div>
-            Total Passengers: {{items.length}}
+            Total Passengers: {{items?.length}}
         </div>
         <div>
-            CheckedIn Passengers: {{checkedInCount()}}/{{items.length}}
+            CheckedIn Passengers: {{checkedInCount()}}/{{items?.length}}
         </div>
     `
 })
