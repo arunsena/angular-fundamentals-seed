@@ -10,9 +10,15 @@ const PASSENGER_API = 'api/passengers';
 export class PassengerDashboardService{
     constructor(private http: Http){}
 
-    getPassengers(id: number): Observable<Passenger>{
+    getPassenger(id: number): Observable<Passenger>{
         return this.http
         .get(`${PASSENGER_API}/${id}`)
+        .map((response: Response) => response.json());
+    }
+
+    getPassengers(): Observable<Passenger[]>{
+        return this.http
+        .get(`${PASSENGER_API}`)
         .map((response: Response) => response.json());
     }
 

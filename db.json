@@ -1,10 +1,10 @@
 {
   "passengers": [
     {
-      "fullname": "John Doe updated",
+      "fullname": "John Doe",
       "id": 0,
       "checkedIn": true,
-      "baggage": "hand-hold",
+      "baggage": "hand-only",
       "checkInDate": "Jul 20, 2019"
     },
     {

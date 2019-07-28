@@ -23,7 +23,10 @@ import { Passenger } from '../../models/passenger.interface'
             </button>
             <button class="btn" (click)="onRemove()">
                 Remove <span class="badge badge-danger"></span>
-        </button>
+            </button>
+            <button class="btn" (click)="onView()">
+                View <span class="badge badge-secondary"></span>
+            </button>
         </li>
     </ul>
     `
@@ -38,6 +41,8 @@ export class PassengerDetailsComponent implements OnChanges{
     @Output()
     edit: EventEmitter <any> = new EventEmitter();
 
+    @Output()
+    view: EventEmitter <any> = new EventEmitter();
 
     editing: boolean = false;
 
@@ -57,11 +62,16 @@ export class PassengerDetailsComponent implements OnChanges{
         this.editing = !this.editing;
     }
 
-    @Output()
     onRemove(){
         this.remove.emit(this.detail);
     }
+
     onEdit(){
         this.edit.emit(this.detail);
     }
+
+    onView(){
+        this.view.emit(this.detail);
+    }
+
 }

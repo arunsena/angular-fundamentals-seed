@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Passenger } from '../../models/passenger.interface'
+import { Passenger } from '../../models/passenger.interface';
 
-import { PassengerDashboardService } from '../../passenger-dashboard.service'
+import { PassengerDashboardService } from '../../passenger-dashboard.service';
+
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'passenger-dashboard',
@@ -14,6 +16,7 @@ import { PassengerDashboardService } from '../../passenger-dashboard.service'
         <passenger-details
             *ngFor="let passenger of passengers"
             [detail]="passenger"
+            (view)="handleView($event)"
             (edit)="handleEdit($event)"
             (remove)="handleRemove($event)">
         </passenger-details>
@@ -22,16 +25,19 @@ import { PassengerDashboardService } from '../../passenger-dashboard.service'
 
 export class PassengerDashboardComponent implements OnInit{
     passengers: Passenger[];
-    constructor(private passengerService: PassengerDashboardService){}
+    constructor(
+        private passengerService: PassengerDashboardService,
+        private router: Router
+    ){}
     ngOnInit(){
         this.passengerService.getPassengers().subscribe((data: Passenger[])=> this.passengers = data);
     }
-    handleRemove(event){
+    handleRemove(event: Passenger){
         this.passengerService.removePassenger(event).subscribe((data: Passenger) =>{
             this.passengers = this.passengers.filter((passenger:Passenger)=> passenger.id !== event.id);
         })
     }
-    handleEdit(event){
+    handleEdit(event: Passenger){
         this.passengerService.updatePassenger(event).subscribe((data: Passenger) => {
             this.passengers = this.passengers.map((passenger:Passenger)=> {
                 if(passenger.id === event.id){
@@ -40,5 +46,8 @@ export class PassengerDashboardComponent implements OnInit{
                 return passenger;
             });
         });
+    }
+    handleView(event: Passenger){
+        this.router.navigate(['/passengers', event.id]);
     }
 }
